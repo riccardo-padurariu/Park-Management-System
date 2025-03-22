@@ -52,6 +52,8 @@ bool Check(int type){
             return false;
         return true;
     }
+
+    return false;
 }
 
 void Add(int type,Vehicle v){
@@ -116,7 +118,68 @@ void DisplayVehicles(){
 }
 
 void CancelSchedule(){
+    string number_plate;
+    int type;
+    cout << "Enter the number plate and the type of the vehicle you want to cancel: " << '\n';
+    cout << "Number plate: ";
+    cin >> number_plate;
+    cout << '\n' << "Type: ";
+    cin >> type;
+    
+    while(type != 1 && type != 2 && type != 3){
+        cout << "Invalid type.Enter again: ";
+        cin >> type;
+    }
 
+    if(type == 1){
+        bool ok = false;
+        for(int i=0;i<Cars.size();i++){
+            if(Cars[i].getNumberPlate() == number_plate){
+                ok = true;
+                for(int j=i;j<Cars.size()-1;j++)
+                    Cars[j] = Cars[j+1];
+            }
+        }
+
+        if(ok){
+            Cars.pop_back();
+            cout << "Vehicle removed succesfully" << '\n';
+        } else {
+            cout << "The number plate doesn't exist" << '\n';
+        }
+    } else if(type == 2){
+        bool ok = false;
+        for(int i=0;i<Trucks.size();i++){
+            if(Trucks[i].getNumberPlate() == number_plate){
+                ok = true;
+                for(int j=i;j<Cars.size()-1;j++)
+                    Trucks[j] = Trucks[j+1];
+            }
+        }
+
+        if(ok){
+            Trucks.pop_back();
+            cout << "Vehicle removed succesfully" << '\n';
+        } else {
+            cout << "The number plate doesn't exist" << '\n';
+        }
+    } else if(type == 3){
+        bool ok = false;
+        for(int i=0;i<Motorbikes.size();i++){
+            if(Motorbikes[i].getNumberPlate() == number_plate){
+                ok = true;
+                for(int j=i;j<Cars.size()-1;j++)
+                    Motorbikes[j] = Motorbikes[j+1];
+            }
+        }
+
+        if(ok){
+            Motorbikes.pop_back();
+            cout << "Vehicle removed succesfully" << '\n';
+        } else {
+            cout << "The number plate doesn't exist" << '\n';
+        }
+    }
 }
 
 int main()
